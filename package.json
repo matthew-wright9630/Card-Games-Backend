@@ -2,7 +2,7 @@
   "name": "card-games-backend",
   "version": "1.0.0",
   "description": "",
-  "main": ".eslintrc.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint .",
@@ -11,6 +11,10 @@
   },
   "author": "Matthew Wright",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "card-games-backend"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "celebrate": "^15.0.3",
