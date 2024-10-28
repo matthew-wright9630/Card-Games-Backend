@@ -14,6 +14,12 @@ const validateGameId = celebrate({
   }),
 });
 
+const validateUserId = celebrate({
+  params: Joi.object().keys({
+    userId: Joi.string().alphanum().length(24),
+  }),
+});
+
 const validateUserSignUp = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30).messages({
@@ -61,9 +67,30 @@ const validateUpdateUser = celebrate({
   }),
 });
 
+const validateGameInfoCreation = celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().required().min(2).max(30).messages({
+      "string.min": 'The minimum length of the "name" field is 2',
+      "string.max": 'The maximum length of the "name" field is 30',
+      "string.empty": 'The "name" field must be filled in',
+    }),
+    description: Joi.string().required().min(10).max(1000).messages({
+      "string.min": 'The minimum length of the "description" field is 2',
+      "string.max": 'The maximum length of the "description" field is 30',
+      "string.empty": 'The "description" field must be filled in',
+    }),
+    user: Joi.string().alphanum().length(24).messages({
+      "string.length": "The user must be 24 characters",
+      "string.empty": "The user field must be included",
+    }),
+  }),
+});
+
 module.exports = {
   validateGameId,
+  validateUserId,
   validateUserSignIn,
   validateUserSignUp,
   validateUpdateUser,
+  validateGameInfoCreation,
 };

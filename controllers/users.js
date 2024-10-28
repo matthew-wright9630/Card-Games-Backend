@@ -5,6 +5,7 @@ const User = require("../models/user");
 const BadRequestError = require("../errors/bad-request-error");
 const NotFoundError = require("../errors/not-found-error");
 const ConflictError = require("../errors/conflict-error");
+const ForbiddenError = require("../errors/forbidden-error");
 // const user = require("../models/user");
 
 module.exports.createUser = (req, res, next) => {
@@ -100,6 +101,31 @@ module.exports.updateUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === "CastError") {
         next(new BadRequestError("The id string is in an invalid format"));
+      } else {
+        next(err);
+      }
+    });
+};
+
+module.exports.deleteUser = (req, res, next) => {
+  const { userId } = req.params;
+  User.findById(userId)
+    .orFail()
+    .then((user) => {
+      if (user._id.str === req.user._id) {
+        throw new ForbiddenError("You do not have permission for this action");
+      }
+      return user
+        .deleteOne()
+        .then(() =>
+          res.send({ message: "User has been successfully deleted" })
+        );
+    })
+    .catch((err) => {
+      if (err.name === "CastError") {
+        next(new BadRequestError("The id string is in an invalid format"));
+      } else if (err.name === "DocumentNotFoundError") {
+        next(new NotFoundError("Item not found"));
       } else {
         next(err);
       }

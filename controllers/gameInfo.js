@@ -3,8 +3,8 @@ const BadRequestError = require("../errors/bad-request-error");
 const NotFoundError = require("../errors/not-found-error");
 
 module.exports.getGameInfo = (req, res, next) => {
-
-  GameInfo.find({})
+  const user = req.params.userId;
+  GameInfo.find({ user })
     .then((games) => {
       res.send({ data: games });
     })

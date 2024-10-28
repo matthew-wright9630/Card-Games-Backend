@@ -13,13 +13,16 @@ const gameInfoSchema = new mongoose.Schema({
   gamesWon: {
     type: Number,
     required: true,
+    default: 0,
   },
   gamesPlayed: {
     type: Number,
     required: true,
+    default: 0,
   },
   liked: {
     type: Boolean,
+    default: false,
     required: true,
   },
   description: {
