@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
-const bcrypt = require("bcryptjs");
 const userSchema = require("./user");
 
 const gameInfoSchema = new mongoose.Schema({

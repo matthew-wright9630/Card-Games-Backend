@@ -1,12 +1,8 @@
 const GameInfo = require("../models/gameInfo");
 const BadRequestError = require("../errors/bad-request-error");
+const NotFoundError = require("../errors/not-found-error");
 
 module.exports.getGameInfo = (req, res, next) => {
-  // const { user } = req.body;
-  // const { gameId } = req.params;
-  // console.log(req.body, "BODY!!!!!!!!!!!!");
-
-  // const query = user === gameId;
 
   GameInfo.find({})
     .then((games) => {

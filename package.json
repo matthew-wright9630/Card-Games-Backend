@@ -16,23 +16,26 @@
     "url": "card-games-backend"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "celebrate": "^15.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.21.1",
-    "express-rate-limit": "^7.4.1",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
     "express-winston": "^4.2.0",
-    "helmet": "^8.0.0",
+    "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.7.2",
-    "nodemon": "^3.1.7",
-    "rate-limiter": "^0.2.0",
-    "ratelimiter": "^3.4.1",
+    "mongoose": "^6.6.1",
     "validator": "^13.12.0",
-    "winston": "^3.15.0"
+    "winston": "^3.14.2"
   },
-  "engines": {
-    "node": "20.x"
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.10.0",
+    "eslint-plugin-import": "^2.30.0",
+    "nodemon": "^3.1.4",
+    "prettier": "^2.8.8"
   }
 }

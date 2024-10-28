@@ -8,7 +8,6 @@ const {
   updateGamesWon,
 } = require("../controllers/gameInfo");
 const auth = require("../middlewares/auth");
-const { validateGameID } = require("../middlewares/validation");
 
 gameInfoRouter.get("/", getGameInfo);
 gameInfoRouter.post("/", auth, createGameInfo);
