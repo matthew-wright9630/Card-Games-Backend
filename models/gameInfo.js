@@ -5,7 +5,7 @@ const gameInfoSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    maxlength: 50,
+    enum: ["Solitaire", "War"],
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
