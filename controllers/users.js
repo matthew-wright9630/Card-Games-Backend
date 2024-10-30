@@ -115,11 +115,12 @@ module.exports.deleteUser = (req, res, next) => {
       if (user._id.str === req.user._id) {
         throw new ForbiddenError("You do not have permission for this action");
       }
-      return user
-        .deleteOne()
-        .then(() =>
-          res.send({ message: "User has been successfully deleted" })
-        );
+      return user.deleteOne().then(() =>
+        res.send({
+          _id: userId,
+          message: "User has been successfully deleted",
+        })
+      );
     })
     .catch((err) => {
       if (err.name === "CastError") {

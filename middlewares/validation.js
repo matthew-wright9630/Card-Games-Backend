@@ -79,9 +79,18 @@ const validateGameInfoCreation = celebrate({
       "string.max": 'The maximum length of the "description" field is 30',
       "string.empty": 'The "description" field must be filled in',
     }),
-    user: Joi.string().alphanum().length(24).messages({
+    owner: Joi.string().alphanum().length(24).messages({
       "string.length": "The user must be 24 characters",
       "string.empty": "The user field must be included",
+    }),
+    gamesPlayed: Joi.number().messages({
+      "number.empty": "the gamesPlayed field must be entered",
+    }),
+    gamesWon: Joi.number().messages({
+      "number.empty": "the gamesWon field must be entered",
+    }),
+    liked: Joi.boolean().messages({
+      "boolean.empty": "The liked field must be entered",
     }),
   }),
 });

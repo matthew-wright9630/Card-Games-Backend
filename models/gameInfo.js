@@ -7,8 +7,9 @@ const gameInfoSchema = new mongoose.Schema({
     required: true,
     maxlength: 50,
   },
-  user: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: userSchema }],
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
   },
   gamesWon: {
     type: Number,
