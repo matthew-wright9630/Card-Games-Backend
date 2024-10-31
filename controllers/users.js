@@ -6,6 +6,14 @@ const BadRequestError = require("../errors/bad-request-error");
 const NotFoundError = require("../errors/not-found-error");
 const ConflictError = require("../errors/conflict-error");
 const ForbiddenError = require("../errors/forbidden-error");
+const {
+  badRequestErrorMessage,
+  conflictErrorMessage,
+  castErrorMessage,
+  notFoundErrorMessage,
+  forbiddenErrorMessage,
+  successDeleteUserMessage,
+} = require("../utils/messages");
 // const user = require("../models/user");
 
 module.exports.createUser = (req, res, next) => {
@@ -14,12 +22,10 @@ module.exports.createUser = (req, res, next) => {
   User.findOne({ email })
     .then((user) => {
       if (!email) {
-        throw new BadRequestError("Invalid data");
+        throw new BadRequestError(badRequestErrorMessage);
       }
       if (user) {
-        throw new ConflictError(
-          "Email address is already taken. Please provide a new email"
-        );
+        throw new ConflictError(conflictErrorMessage);
       }
 
       return bcrypt.hash(password, 10);
@@ -37,9 +43,9 @@ module.exports.createUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === "CastError") {
-        next(new BadRequestError("The id string is in an invalid format"));
+        next(new BadRequestError(castErrorMessage));
       } else if (err.name === "ValidationError") {
-        next(new BadRequestError("Invalid data"));
+        next(new BadRequestError(badRequestErrorMessage));
       } else {
         next(err);
       }
@@ -60,7 +66,7 @@ module.exports.login = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === "CastError") {
-        next(new BadRequestError("The id string is in an invalid format"));
+        next(new BadRequestError(castErrorMessage));
       } else {
         next(err);
       }
@@ -89,7 +95,7 @@ module.exports.updateUser = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        throw new NotFoundError("No user with matching ID found");
+        throw new NotFoundError(notFoundErrorMessage);
       }
       res.send({
         name: user.name,
@@ -100,7 +106,7 @@ module.exports.updateUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === "CastError") {
-        next(new BadRequestError("The id string is in an invalid format"));
+        next(new BadRequestError(castErrorMessage));
       } else {
         next(err);
       }
@@ -113,20 +119,20 @@ module.exports.deleteUser = (req, res, next) => {
     .orFail()
     .then((user) => {
       if (user._id.str === req.user._id) {
-        throw new ForbiddenError("You do not have permission for this action");
+        throw new ForbiddenError(forbiddenErrorMessage);
       }
       return user.deleteOne().then(() =>
         res.send({
           _id: userId,
-          message: "User has been successfully deleted",
+          message: successDeleteUserMessage,
         })
       );
     })
     .catch((err) => {
       if (err.name === "CastError") {
-        next(new BadRequestError("The id string is in an invalid format"));
+        next(new BadRequestError(castErrorMessage));
       } else if (err.name === "DocumentNotFoundError") {
-        next(new NotFoundError("Item not found"));
+        next(new NotFoundError(notFoundErrorMessage));
       } else {
         next(err);
       }

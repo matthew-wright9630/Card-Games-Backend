@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const userSchema = require("./user");
 
 const gameInfoSchema = new mongoose.Schema({
   name: {

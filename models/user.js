@@ -2,7 +2,13 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const BadRequestError = require("../errors/bad-request-error");
-const AuthentincationError = require("../errors/authentication-error");
+const AuthenticationError = require("../errors/authentication-error");
+const {
+  authenticationErrorMessage,
+  badRequestErrorMessage,
+  avatarValidityMessage,
+  emailValidityMessage,
+} = require("../utils/messages");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -18,7 +24,7 @@ const userSchema = new mongoose.Schema({
       validator(value) {
         return validator.isURL(value);
       },
-      message: "You must enter a valid URL",
+      message: avatarValidityMessage,
     },
   },
   email: {
@@ -29,7 +35,7 @@ const userSchema = new mongoose.Schema({
       validator(value) {
         return validator.isEmail(value);
       },
-      message: "You must enter a valid email address",
+      message: emailValidityMessage,
     },
   },
   password: {
@@ -47,14 +53,14 @@ userSchema.statics.findUserByCredentials = function findUserByCredentials(
     .select("+password")
     .then((user) => {
       if (password === undefined || email === undefined) {
-        throw new BadRequestError("Invalid data");
+        throw new BadRequestError(badRequestErrorMessage);
       }
       if (!user) {
-        throw new AuthentincationError("Incorrect email or password");
+        throw new AuthenticationError(authenticationErrorMessage);
       }
       return bcrypt.compare(password, user.password).then((matched) => {
         if (!matched) {
-          throw new AuthentincationError("Incorrect email or password");
+          throw new AuthenticationError(authenticationErrorMessage);
         }
 
         return user;

@@ -10,12 +10,11 @@ const {
 } = require("../controllers/gameInfo");
 const auth = require("../middlewares/auth");
 const {
-  validateUserId,
   validateGameId,
   validateGameInfoCreation,
 } = require("../middlewares/validation");
 
-gameInfoRouter.get("/:userId", validateUserId, getGameInfo);
+gameInfoRouter.get("/:userId", getGameInfo);
 gameInfoRouter.post("/", auth, validateGameInfoCreation, createGameInfo);
 gameInfoRouter.put("/:gameId/likes", validateGameId, auth, likeGame);
 gameInfoRouter.delete("/:gameId/likes", validateGameId, auth, dislikeGame);
