@@ -6,7 +6,6 @@ const AuthenticationError = require("../errors/authentication-error");
 const {
   authenticationErrorMessage,
   badRequestErrorMessage,
-  avatarValidityMessage,
   emailValidityMessage,
 } = require("../utils/messages");
 
@@ -16,16 +15,6 @@ const userSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
     required: true,
-  },
-  avatar: {
-    type: String,
-    required: true,
-    validate: {
-      validator(value) {
-        return validator.isURL(value);
-      },
-      message: avatarValidityMessage,
-    },
   },
   email: {
     type: String,

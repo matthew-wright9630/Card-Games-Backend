@@ -8,7 +8,6 @@ const authenticationErrorMessage = "Incorrect email or password";
 const successDeleteGameInfoMessage =
   "Game information has been successfully deleted";
 const successDeleteUserMessage = "User has been successfully deleted";
-const avatarValidityMessage = "You must enter a valid URL";
 const emailValidityMessage = "You must enter a valid email address";
 
 module.exports = {
@@ -20,6 +19,5 @@ module.exports = {
   authenticationErrorMessage,
   successDeleteGameInfoMessage,
   successDeleteUserMessage,
-  avatarValidityMessage,
   emailValidityMessage,
 };

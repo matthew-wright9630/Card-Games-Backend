@@ -17,7 +17,7 @@ const {
 // const user = require("../models/user");
 
 module.exports.createUser = (req, res, next) => {
-  const { name, avatar, email, password } = req.body;
+  const { name, email, password } = req.body;
 
   User.findOne({ email })
     .then((user) => {
@@ -33,13 +33,12 @@ module.exports.createUser = (req, res, next) => {
     .then((hash) =>
       User.create({
         name,
-        avatar,
         email,
         password: hash,
       })
     )
     .then((user) => {
-      res.send({ name: user.name, avatar: user.avatar, email: user.email });
+      res.send({ name: user.name, email: user.email });
     })
     .catch((err) => {
       if (err.name === "CastError") {
@@ -78,7 +77,6 @@ module.exports.getCurrentUser = (req, res, next) => {
     .then((user) => {
       res.send({
         name: user.name,
-        avatar: user.avatar,
         email: user.email,
         _id: user._id,
       });
@@ -87,10 +85,10 @@ module.exports.getCurrentUser = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const { name, avatar } = req.body;
+  const { name } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
-    { name, avatar },
+    { name },
     { new: true, runValidators: true }
   )
     .then((user) => {
@@ -99,7 +97,6 @@ module.exports.updateUser = (req, res, next) => {
       }
       res.send({
         name: user.name,
-        avatar: user.avatar,
         email: user.email,
         _id: user._id,
       });

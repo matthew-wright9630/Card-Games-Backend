@@ -15,7 +15,7 @@ const {
 } = require("../middlewares/validation");
 
 gameInfoRouter.get("/:userId", getGameInfo);
-gameInfoRouter.post("/", auth, validateGameInfoCreation, createGameInfo);
+gameInfoRouter.post("/", validateGameInfoCreation, createGameInfo);
 gameInfoRouter.put("/:gameId/likes", validateGameId, auth, likeGame);
 gameInfoRouter.delete("/:gameId/likes", validateGameId, auth, dislikeGame);
 gameInfoRouter.patch("/:gameId", auth, validateGameId, updateGamesPlayed);

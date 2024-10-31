@@ -27,10 +27,6 @@ const validateUserSignUp = celebrate({
       "string.max": 'The maximum length of the "name" field is 30',
       "string.empty": 'The "name" field must be filled in',
     }),
-    avatar: Joi.string().required().custom(validateUrl).messages({
-      "string.empty": `The "avatar" field must be filled in`,
-      "string.uri": `The avatar field must have a valid url`,
-    }),
     email: Joi.string().required().email().messages({
       "string.empty": "The email field must be filled in",
       "string.email": "The email field must have a valid email format",
@@ -60,10 +56,6 @@ const validateUpdateUser = celebrate({
       "string.max": 'The maximum length of the "name" field is 30',
       "string.empty": 'The "name" field must be filled in',
     }),
-    avatar: Joi.string().required().custom(validateUrl).messages({
-      "string.empty": `The "avatar" field must be filled in`,
-      "string.uri": `The avatar field must have a valid url`,
-    }),
   }),
 });
 
@@ -78,6 +70,10 @@ const validateGameInfoCreation = celebrate({
       "string.min": 'The minimum length of the "description" field is 2',
       "string.max": 'The maximum length of the "description" field is 30',
       "string.empty": 'The "description" field must be filled in',
+    }),
+    owner: Joi.string().alphanum().length(24).messages({
+      "string.length": "The user must be 24 characters",
+      "string.empty": "The user field must be included",
     }),
     gamesPlayed: Joi.number().messages({
       "number.empty": "the gamesPlayed field must be entered",
