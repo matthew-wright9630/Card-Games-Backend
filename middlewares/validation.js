@@ -1,13 +1,12 @@
 const { Joi, celebrate } = require("celebrate");
+const validator = require("validator");
 
-// May add avatar information later
-//
-// function validateUrl(value, helpers) {
-//   if (validator.isURL(value)) {
-//     return value;
-//   }
-//   return helpers.error("string.uri");
-// }
+function validateUrl(value, helpers) {
+  if (validator.isURL(value)) {
+    return value;
+  }
+  return helpers.error("string.uri");
+}
 
 const validateGameId = celebrate({
   params: Joi.object().keys({

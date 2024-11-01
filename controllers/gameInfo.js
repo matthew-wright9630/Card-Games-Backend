@@ -11,7 +11,8 @@ const {
 } = require("../utils/messages");
 
 module.exports.getGameInfo = (req, res, next) => {
-  GameInfo.find()
+  const { userId } = req.params;
+  GameInfo.find({ userId })
     .then((games) => {
       res.send({ data: games });
     })
