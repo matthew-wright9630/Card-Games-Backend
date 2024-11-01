@@ -11,7 +11,8 @@ const {
 } = require("../utils/messages");
 
 module.exports.getGameInfo = (req, res, next) => {
-  GameInfo.find()
+  const { userId } = req.params;
+  GameInfo.find({ userId })
     .then((games) => {
       res.send({ data: games });
     })
@@ -120,12 +121,10 @@ module.exports.dislikeGame = (req, res, next) => {
 };
 
 module.exports.deleteGameInfo = (req, res, next) => {
-  console.log(req.body, "BODY OF REQUEST");
   const { gameId } = req.params;
   GameInfo.findById(gameId)
     .orFail()
     .then((game) => {
-      console.log(game.owner, req.user._id);
       if (String(game.owner) !== req.user._id) {
         throw new ForbiddenError(forbiddenErrorMessage);
       }
