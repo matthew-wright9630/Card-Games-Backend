@@ -8,6 +8,8 @@ function validateUrl(value, helpers) {
   return helpers.error("string.uri");
 }
 
+const pattern = /^[a-zA-Z0-9 ]{2,30}$/;
+
 const validateGameId = celebrate({
   params: Joi.object().keys({
     gameId: Joi.string().alphanum().length(24),
@@ -22,10 +24,12 @@ const validateUserId = celebrate({
 
 const validateUserSignUp = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30).messages({
+    name: Joi.string().required().min(2).max(30).regex(pattern).messages({
       "string.min": 'The minimum length of the "name" field is 2',
       "string.max": 'The maximum length of the "name" field is 30',
       "string.empty": 'The "name" field must be filled in',
+      "string.pattern.base":
+        "The name field can only contain alphanumeric characters",
     }),
     email: Joi.string().required().email().messages({
       "string.empty": "The email field must be filled in",
@@ -51,10 +55,12 @@ const validateUserSignIn = celebrate({
 
 const validateUpdateUser = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30).messages({
+    name: Joi.string().required().min(2).max(30).regex(pattern).messages({
       "string.min": 'The minimum length of the "name" field is 2',
       "string.max": 'The maximum length of the "name" field is 30',
       "string.empty": 'The "name" field must be filled in',
+      "string.pattern.base":
+        "The name field can only contain alphanumeric characters",
     }),
   }),
 });
