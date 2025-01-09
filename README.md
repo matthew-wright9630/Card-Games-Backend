@@ -20,6 +20,6 @@ Winston, winston-express, celebrate, helmet, validator, mongoose, bcryptjs, expr
 
 # Links
 
-- Website: https://www.mwcardgames.fairuse.org;
+- Website: https://www.mwcardgames.csproject.org;
 - GitHub (Backend Repository):   https://www.github.com/matthew-wright9630/Card-Games-Backend;
 - GitHub (Frontend Repository):  https://www.github.com/matthew-wright9630/Card-Games-Frontend;

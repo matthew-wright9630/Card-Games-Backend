@@ -16,6 +16,7 @@
     "url": "card-games-backend"
   },
   "dependencies": {
+    "@joi/date": "^2.1.1",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "celebrate": "^15.0.3",
@@ -25,6 +26,7 @@
     "express-rate-limit": "^7.4.0",
     "express-winston": "^4.2.0",
     "helmet": "^7.1.0",
+    "joi-date-extensions": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^6.6.1",
     "validator": "^13.12.0",

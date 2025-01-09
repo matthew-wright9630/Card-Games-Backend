@@ -1,4 +1,5 @@
 const { Joi, celebrate } = require("celebrate");
+const JoiDate = require("joi-date-extensions");
 const validator = require("validator");
 
 function validateUrl(value, helpers) {
@@ -93,6 +94,40 @@ const validateGameInfoCreation = celebrate({
   }),
 });
 
+const validateFeedbackRequest = celebrate({
+  body: {
+    feedbackType: Joi.string()
+      .required()
+      .valid("recommendation", "bug")
+      .messages({
+        "string.min": 'The minimum length of the "name" field is 2',
+        "string.max": 'The maximum length of the "name" field is 30',
+        "string.empty": 'The "name" field must be filled in',
+      }),
+    email: Joi.string().required().email().messages({
+      "string.empty": "The email field must be filled in",
+      "string.email": "The email field must have a valid email format",
+    }),
+    description: Joi.string().required().messages({
+      "string.min": "The minimum length of the description field is 10",
+      "string.empty": 'The "description" field must be filled in',
+    }),
+    date: Joi.string()
+      .custom((value, helpers) => {
+        const date = new Date(value);
+        if (isNaN(date.getTime())) {
+          return helpers.error("any.invalid");
+        }
+        return date;
+      })
+      .required()
+      .messages({
+        "date.empty": "Date field cannot be empty",
+        "date.format": "Date field must be in a MM/DD/YYYY format",
+      }),
+  },
+});
+
 module.exports = {
   validateGameId,
   validateUserId,
@@ -100,4 +135,5 @@ module.exports = {
   validateUserSignUp,
   validateUpdateUser,
   validateGameInfoCreation,
+  validateFeedbackRequest,
 };
