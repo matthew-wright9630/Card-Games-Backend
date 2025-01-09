@@ -21,7 +21,7 @@ mongoose
 app.use(express.json());
 
 app.use(helmet());
-// app.use(rateLimiter);
+app.use(rateLimiter);
 app.use(cors());
 
 app.use(requestLogger);
