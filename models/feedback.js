@@ -20,9 +20,11 @@ const feedbackSchema = new mongoose.Schema({
   description: {
     type: String,
     minLength: 10,
+    required: true,
   },
   date: {
     type: Date,
+    required: true,
   },
 });
 

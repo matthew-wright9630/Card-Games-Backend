@@ -104,7 +104,7 @@ const validateFeedbackRequest = celebrate({
         "string.max": 'The maximum length of the "name" field is 30',
         "string.empty": 'The "name" field must be filled in',
       }),
-    email: Joi.string().required().email().messages({
+    email: Joi.string().email().messages({
       "string.empty": "The email field must be filled in",
       "string.email": "The email field must have a valid email format",
     }),
