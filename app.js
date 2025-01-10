@@ -23,17 +23,6 @@ app.use(express.json());
 app.use(helmet());
 app.use(rateLimiter);
 app.use(cors());
-// app.use(
-//   cors({
-//     origin: [
-//       "https://mwcardgames.csproject.org",
-//       "https://www.mwcardgames.csproject.org",
-//       "https://api.mwcardgames.csproject.org",
-//     ],
-//     methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-// );
 
 app.use(requestLogger);
 app.get("/crash-test", () => {
