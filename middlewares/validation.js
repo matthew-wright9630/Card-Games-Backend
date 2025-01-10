@@ -105,7 +105,6 @@ const validateFeedbackRequest = celebrate({
         "string.empty": 'The "name" field must be filled in',
       }),
     email: Joi.string().email().messages({
-      "string.empty": "The email field must be filled in",
       "string.email": "The email field must have a valid email format",
     }),
     description: Joi.string().required().messages({
